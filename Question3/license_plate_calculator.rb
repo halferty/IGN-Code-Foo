@@ -14,7 +14,7 @@ require 'sinatra'
 # Set up a route
 #
 get '/' do
-	'Hello, world! Try '
+	erb :hello
 end
 
 get '/calc/:population' do	
