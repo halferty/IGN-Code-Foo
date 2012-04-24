@@ -1,4 +1,4 @@
 IGN-Code-Foo
 ============
 
-Application for IGNs Code Foo^2
+Application for IGN's Code Foo^2
