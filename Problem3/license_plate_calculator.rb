@@ -3,69 +3,52 @@
 # Calculates how many letters and numbers must be on a license
 # plate to account for a given population of drivers.
 #
-# There are probably heavily-mathy ways to calculate this
-# combinatorially, but I'm no mathematician. Instead, I'll
-# count up through the combinations and stop when I find
-# one that 'fits'.
-#
-# The license plates will follow this pattern:
-#
-# License plate characters	Max. population covered
-#
-# <num>				10
-# <letter>			26
-# <num><num>			100
-# <num><letter>			260
-# <letter><letter>		676
-# <num><num><num>		1000
-#
-# To accomplish this, I'll use the following rules:
-#
-# 1. If all locations are letters, add a location and set all 
-#	locations to numbers.
-#
-# 2. Otherwise, set the rightmost number to a letter.
-#
-#
-#
 # This program is exposed as an API using sinatra.
+# It's actually running at
+#
 
 require 'sinatra'
 
+#
+# Set up a route
+#
 get '/calc/:population' do
-	req_pop = params[:population].to_i
-	max_pop = 0
-	plate = Array.new(1, :number)
-	done = false
-	loop do	
-		# Maximum population that is covered by current combination
-		max_pop = (plate.count(:letter)*26) * (plate.count(:number)*10)
-
-		# Loop until we surpass the requires population
-		break if max_pop >= req_pop
-
-		if max_pop < req_pop
-			# If all positions are letters
-			if plate.count(:letter) == plate.size
-				# Add a position and set all to numbers
-				plate.push(:number)
-				plate.fill(:number)
-			else
-				# Otherwise, set a number to a letter
-				plate[plate.index(:number)] = :letter
-			end
+	population = params[:population].to_i
+	
+	# Start with one number, no letters
+	numbers, letters = 1, 0
+	
+	# Iterate through the combinations
+	while plates(numbers, letters) < population do
+		if numbers == 0
+			numbers = letters + 1
+			letters = 0
+		else
+			numbers -= 1
+			letters += 1
 		end
 	end
 
-	# Print results
-	@req_pop = req_pop
-	@numbers = plate.count(:number)
-	@letters = plate.count(:letter)
-	@total = max_pop
-	@excess = max_pop - req_pop
+	# Format the results for the erb template
+	@population = population
+	
+	# Decides if a comma should appear in the pattern result, and if plural nouns should be used
+	@pattern =	((numbers > 0)? (numbers.to_s + "number" + ((numbers > 1)? "s" : "")) : "") +
+				(((numbers > 0) and (letters > 0))? ", " : "") +
+				((letters > 0)? (letters.to_s + "letter" + ((letters > 1)? "s" : "")) : "") +
+	@total = plates(numbers, letters)
+	@excess = plates(numbers, letters) - population
 	
 	erb :results	
 end
+
+# Calculates the number of plates possible with a given number of letters and numbers
+def plates(numbers, letters)
+	return	((numbers == 0)? 1 : (10 ** numbers)) *
+			((letters == 0)? 1 : (26 ** letters))
+end
+
+# The ERB HTML layout 
 
 __END__
 
@@ -80,13 +63,13 @@ __END__
 <div style="width:30%">
 	<ul>
 		<li>Population: <span style="float:right">
-			<%= @req_pop %></span></li>
+			<%= @population %></span></li>
 		<li>Pattern: <span style="float:right">
-			<%= @numbers %> numbers,
-			<%= @letters %> letters</span></li>
+			<%= @pattern %></span></li>
 		<li>Total plates: <span style="float:right">
 			<%= @total %></span></li>
 		<li>Excess Plates: <span style="float:right">
 			<%= @excess %></span></li>
 	</ul>
 </div>
+
