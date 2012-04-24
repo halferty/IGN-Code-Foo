@@ -4,7 +4,7 @@
 # plate to account for a given population of drivers.
 #
 # This program is exposed as an API using sinatra.
-# It's actually running at
+# It's actually running at ign-code-foo-problem-3-emh.heroku.com
 #
 
 require 'rubygems'
@@ -14,7 +14,7 @@ require 'sinatra'
 # Set up a route
 #
 get '/' do
-	'Hello, world!'
+	'Hello, world! Try '
 end
 
 get '/calc/:population' do	
@@ -82,4 +82,9 @@ __END__
 			<%= @excess %></span></li>
 	</ul>
 </div>
+
+@@hello
+<h2>Hello, world!</h2><br>
+<p>Try <a href="ign-code-foo-problem-3-emh.heroku.com/calc/1002">
+ign-code-foo-problem-3-emh.heroku.com/calc/1002</a></p>
 
