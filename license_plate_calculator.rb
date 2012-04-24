@@ -13,6 +13,10 @@ require 'sinatra'
 #
 # Set up a route
 #
+get '/' do
+	'Hello, world!'
+end
+
 get '/calc/:population' do	
 	population = params[:population].to_i
 	
