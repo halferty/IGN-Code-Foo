@@ -12,7 +12,7 @@ require 'sinatra'
 #
 # Set up a route
 #
-get '/calc/:population' do
+get '/calc/:population' do	
 	population = params[:population].to_i
 	
 	# Start with one number, no letters
@@ -31,43 +31,48 @@ get '/calc/:population' do
 
 	# Format the results for the erb template
 	@population = population
-	
-	# Decides if a comma should appear in the pattern result, and if plural nouns should be used
-	@pattern =	((numbers > 0)? (numbers.to_s + "number" + ((numbers > 1)? "s" : "")) : "") +
-				(((numbers > 0) and (letters > 0))? ", " : "") +
-				((letters > 0)? (letters.to_s + "letter" + ((letters > 1)? "s" : "")) : "") +
 	@total = plates(numbers, letters)
 	@excess = plates(numbers, letters) - population
+	
+	# Decides if a comma should appear in the pattern result,
+	# and if plural nouns should be used
+	@pattern =	((numbers > 0)? (numbers.to_s + "number" + 
+			((numbers > 1)? "s" : "")) : "") +
+			(((numbers > 0) and (letters > 0))? ", " : "") +
+			((letters > 0)? (letters.to_s + "letter" +
+			((letters > 1)? "s" : "")) : "")
 	
 	erb :results	
 end
 
-# Calculates the number of plates possible with a given number of letters and numbers
+# Calculates the number of plates possible with a given number of
+# letters and numbers
 def plates(numbers, letters)
 	return	((numbers == 0)? 1 : (10 ** numbers)) *
-			((letters == 0)? 1 : (26 ** letters))
+		((letters == 0)? 1 : (26 ** letters))
 end
+
+
 
 # The ERB HTML layout 
 
 __END__
 
 @@layout
-<html>
-	<body>
-		<%= yield%>
-	</body>
-</html>
+<html><body><%= yield%></body></html>
 
 @@results
 <div style="width:30%">
 	<ul>
 		<li>Population: <span style="float:right">
 			<%= @population %></span></li>
+
 		<li>Pattern: <span style="float:right">
 			<%= @pattern %></span></li>
+
 		<li>Total plates: <span style="float:right">
 			<%= @total %></span></li>
+
 		<li>Excess Plates: <span style="float:right">
 			<%= @excess %></span></li>
 	</ul>
