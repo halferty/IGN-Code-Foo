@@ -36,10 +36,10 @@ get '/calc/:population' do
 	
 	# Decides if a comma should appear in the pattern result,
 	# and if plural nouns should be used
-	@pattern =	((numbers > 0)? (numbers.to_s + "number" + 
+	@pattern =	((numbers > 0)? (numbers.to_s + " number" + 
 			((numbers > 1)? "s" : "")) : "") +
 			(((numbers > 0) and (letters > 0))? ", " : "") +
-			((letters > 0)? (letters.to_s + "letter" +
+			((letters > 0)? (letters.to_s + " letter" +
 			((letters > 1)? "s" : "")) : "")
 	
 	erb :results	
