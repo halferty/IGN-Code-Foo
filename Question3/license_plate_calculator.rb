@@ -85,6 +85,6 @@ __END__
 
 @@hello
 <h2>Hello, world!</h2><br>
-<p>Try <a href="ign-code-foo-problem-3-emh.heroku.com/calc/1002">
+<p>Try <a href="/calc/1002">
 ign-code-foo-problem-3-emh.heroku.com/calc/1002</a></p>
 
