@@ -1,2 +1,2 @@
-require './license_plate_calculator'
-run sinatra::Application
+require './Problem3/license_plate_calculator'
+run Sinatra::Application
