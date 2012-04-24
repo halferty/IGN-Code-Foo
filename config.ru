@@ -1,2 +1,2 @@
-require 'license_plate_calculator' run
+require './license_plate_calculator' run
 run sinatra::Application
