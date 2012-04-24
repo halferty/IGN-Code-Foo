@@ -7,6 +7,7 @@
 # It's actually running at
 #
 
+require 'rubygems'
 require 'sinatra'
 
 #
