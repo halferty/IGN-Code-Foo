@@ -3,8 +3,8 @@ IGN-Code-Foo
 
 Application for IGN's Code Foo^2
 
-### Question 3
+### Questions
 
-I have the program for question 3 running at ign-code-foo-problem-3-emh.heroku.com/calc/ (example: [ign-code-foo-problem-3-emh.heroku.com/calc/400](http://ign-code-foo-problem-3-emh.heroku.com/calc/400) )
+This repository is a sinatra application that can be seen running at http://ign-code-foo-2.herokuapp.com/
 
 
