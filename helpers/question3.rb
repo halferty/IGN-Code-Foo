@@ -9,15 +9,15 @@ class LicensePlateCalculator
 		# Iterate through the combinations
 		while plates < population do
 			if numbers == 0
-				numbers = letters + 1
-				letters = 0
+				@numbers = @letters + 1
+				@letters = 0
 			else
-				numbers -= 1
-				letters += 1
+				@numbers -= 1
+				@letters += 1
 			end
 		end
-		@plates = plates
-		@excess = plates - population
+		@plates = @plates
+		@excess = @plates - @population
 	end
 
 	def plates
