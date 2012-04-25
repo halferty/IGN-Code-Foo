@@ -1,26 +1,15 @@
 require_relative '../helpers/question3.rb'
 
 get '/question3/:population' do	
-	population = params[:population].to_i
 	
-	# Start with one number, no letters
-	numbers, letters = 1, 0
-	
-	# Iterate through the combinations
-	while plates(numbers, letters) < population do
-		if numbers == 0
-			numbers = letters + 1
-			letters = 0
-		else
-			numbers -= 1
-			letters += 1
-		end
-	end
+	calc = LicensePlateCalculator.new(params[:population].to_i)	
 
 	# Format the results for the erb template
-	@population = population
-	@total = plates(numbers, letters)
-	@excess = plates(numbers, letters) - population
+	@population = calc.population
+	@total = calc.plates
+	@excess = calc.excess
+	numbers = calc.numbers
+	letters = calc.numbers
 	
 	# Decides if a comma should appear in the pattern result,
 	# and if plural nouns should be used
