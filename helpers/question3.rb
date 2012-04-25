@@ -1,5 +1,5 @@
 def calc(population)
-	numbers, letters = 0, 1
+	numbers, letters = 1, 0
 	while plates(numbers, letters) < population do
 		if numbers == 0
 			numbers = letters + 1

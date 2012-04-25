@@ -3,10 +3,7 @@ require_relative '../helpers/question3.rb'
 get '/question3/:population' do		
 
 	population = params[:population].to_i
-	@total,
-	@numbers,
-	@letters,
-	@excess = calc(population)
+	@total, @numbers, @letters, @excess = calc(population)
 	
 	# Decides if a comma should appear in the pattern result,
 	# and if plural nouns should be used
