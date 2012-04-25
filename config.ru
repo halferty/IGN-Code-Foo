@@ -1,2 +1,2 @@
 require './main'
-run MyApp.new
+run CodeFoo.new
