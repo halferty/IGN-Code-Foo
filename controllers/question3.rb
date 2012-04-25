@@ -7,7 +7,7 @@ get '/question3/:population' do
 	
 	pattern = patternify(numbers, letters)
 
-	pattern + "|" + total + "|" + excess
+	pattern + "|" + total.to_s + "|" + excess.to_s
 end
 
 
