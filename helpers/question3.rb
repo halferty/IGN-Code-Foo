@@ -1,28 +1,22 @@
-class LicensePlateCalculator
-	attr_accessor :population, :numbers, :letters, :plates, :excess
- 
-	def initialize(population)
-		@population = population
-		@numbers = 1
-		@letters = 0
-	
-		# Iterate through the combinations
-		while plates < population do
-			if numbers == 0
-				@numbers = @letters + 1
-				@letters = 0
-			else
-				@numbers -= 1
-				@letters += 1
-			end
+def calc(population)
+	numbers, letters = 0, 1
+	while plates(numbers, letters) < population do
+		if numbers == 0
+			numbers = letters + 1
+			letters = 0
+		else
+			numbers -= 1
+			letters += 1
 		end
-		@plates = @plates
-		@excess = @plates - @population
 	end
+	total = plates(numbers, letters)
+	excess = total - population
+	return total, numbers, letters, excess
+	
+end
 
-	def plates
-		return	((@numbers == 0)? 1 : (10 ** @numbers)) *
-			((@letters == 0)? 1 : (26 ** @letters))
-	end
+def plates(numbers, letters)
+	return	((numbers == 0)? 1 : (10 ** numbers)) *
+		((letters == 0)? 1 : (26 ** letters))
 end
 

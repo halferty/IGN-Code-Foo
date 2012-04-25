@@ -1,15 +1,12 @@
 require_relative '../helpers/question3.rb'
 
-get '/question3/:population' do	
-	
-	calc = LicensePlateCalculator.new(params[:population].to_i)	
+get '/question3/:population' do		
 
-	# Format the results for the erb template
-	@population = calc.population
-	@total = calc.plates
-	@excess = calc.excess
-	numbers = calc.numbers
-	letters = calc.numbers
+	population = params[:population].to_i
+	@total,
+	@numbers,
+	@letters,
+	@excess = calc(population)
 	
 	# Decides if a comma should appear in the pattern result,
 	# and if plural nouns should be used
