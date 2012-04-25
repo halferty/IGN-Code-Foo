@@ -28,18 +28,18 @@ end
 # and if plural nouns should be used
 def patternify(numbers, letters)
 	pattern = ""
-	if (numbers > 0) do
+	if (numbers > 0)
 		pattern += numbers.to_s + " number"
-		if (numbers > 1) do
+		if (numbers > 1)
 			pattern += "s"
 		end
 	end
-	if (numbers > 0 and letters > 0) do
+	if (numbers > 0 and letters > 0)
 		pattern += ", "
 	end
-	if (letters > 0) do
+	if (letters > 0)
 		pattern += letters.to_s + " letter"
-		if (letters > 1) do
+		if (letters > 1)
 			pattern += "s"
 		end
 	end
