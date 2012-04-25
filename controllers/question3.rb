@@ -27,7 +27,8 @@ get '/question3/:population' do
 			(((numbers > 0) and (letters > 0))? ", " : "") +
 			((letters > 0)? (letters.to_s + " letter" +
 			((letters > 1)? "s" : "")) : "")
-	
+
+	@title = 'Question 3 - license plate calculation'	
 	erb :results	
 end
 
