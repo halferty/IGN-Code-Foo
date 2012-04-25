@@ -1,23 +1,4 @@
-# license_plate_calculator.rb
-#
-# Calculates how many letters and numbers must be on a license
-# plate to account for a given population of drivers.
-#
-# This program is exposed as an API using sinatra.
-# It's actually running at ign-code-foo-problem-3-emh.heroku.com
-#
-
-require 'rubygems'
-require 'sinatra'
-
-#
-# Set up a route
-#
-get '/' do
-	erb :hello
-end
-
-get '/calc/:population' do	
+get '/question3/:population' do	
 	population = params[:population].to_i
 	
 	# Start with one number, no letters
@@ -56,35 +37,4 @@ def plates(numbers, letters)
 	return	((numbers == 0)? 1 : (10 ** numbers)) *
 		((letters == 0)? 1 : (26 ** letters))
 end
-
-
-
-# The ERB HTML layout 
-
-__END__
-
-@@layout
-<html><body><%= yield%></body></html>
-
-@@results
-<div style="width:30%">
-	<ul>
-		<li>Population: <span style="float:right">
-			<%= @population %></span></li>
-
-		<li>Pattern: <span style="float:right">
-			<%= @pattern %></span></li>
-
-		<li>Total plates: <span style="float:right">
-			<%= @total %></span></li>
-
-		<li>Excess Plates: <span style="float:right">
-			<%= @excess %></span></li>
-	</ul>
-</div>
-
-@@hello
-<h2>Hello, world!</h2><br>
-<p>Try <a href="/calc/1002">
-ign-code-foo-problem-3-emh.heroku.com/calc/1002</a></p>
 
