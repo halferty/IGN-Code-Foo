@@ -1,11 +1,5 @@
-require 'sinatra/base'
+require 'sinatra'
 
-class CodeFoo < Sinatra::Base
-	get('/') do
-		return "hi"
-	end
+Dir["./controllers/*.rb"].each { |file| require file }
+Dir["./helpers/*.rb"].each { |file| require file }
 
-	get '/1' do
-		return "ih"
-	end
-end

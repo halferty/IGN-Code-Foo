@@ -1,2 +1,2 @@
 require './main'
-run CodeFoo.new
+run Sinatra::Application
