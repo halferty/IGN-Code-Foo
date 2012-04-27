@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IGN Code Foo^2</title>
+		<link rel="main.css" media="screen" rel="stylesheet" type="text/css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+		<script src="license_plates.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#population").keyup(function() {
+					calculatePlates($(this).val());
+				});
+			});
+        </script>
+	</head>
+	<body>
+	
+		<!-- QUESTION 3 -->
+		<form>
+			<ul>
+				<li>
+					Population:
+					<span><input id="population" type="text"></span>
+				</li>
+				<li>
+					Pattern:
+					<span id="pattern"></span>
+				</li>
+				<li>
+					Total Plates:
+					<span id="total"></span>
+				</li>
+				<li>
+					Excess Plates:
+					<span id="excess"></span>
+				</li>
+			</ul>
+		</form>
+	</body>
+	</html>
+		
+		
+		
