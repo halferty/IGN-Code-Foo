@@ -1,0 +1,11 @@
+.q3 ul {
+	float: left;
+	width: 20%;
+	margin-top: 20px;
+	margin-right: 80px;
+}
+
+.q3 ul li span {
+	float: right;
+	font-weight: bold;
+}
