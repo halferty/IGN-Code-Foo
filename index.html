@@ -8,14 +8,14 @@
 		<script src="connect_4.js" type="text/javascript"></script>
 	</head>
 	<body>
-	
-		<!-- QUESTION 2 -->
+		
+		<!-- QUESTION 2 
 		
 		<p>You're looking at it. :P I would choose a fluid layout if I thought it wouldn't pose
 		a problem for mobile users. If the page is primarily text or scalable CSS/HTML5 elements, a
 		fluid layout may work better than creating a separate mobile view.</p>
 	
-		<!-- QUESTION 3 -->
+		<!-- QUESTION 3 
 		<form>
 			<ul>
 				<li>
@@ -44,7 +44,7 @@
 			});
         </script>
 		
-		<!-- BONUS: CONNECT 4 -->
+		 BONUS: CONNECT 4 -->
 		<center>
 		<code>
 		The world's worst connect four game.<br><br>
@@ -122,30 +122,14 @@
 		o<br><br>
 		h, l = move left, right<br>
 		Spacebar = drop a thingie.</br>
-		<span id="status">Your turn!</span><br>
-		<span id="error">Sorry! That row is full!</span><br>
+		r = restart game.</br>
+		<span id="error" style="color:red"></span><br>
 		</code>
 		</center>
 		<script type="text/javascript">
 			$("document").ready(function() {
 				$(document).keydown(function(e) {
-					switch (e.keyCode) {
-					
-					// H key
-					case 72:
-						moveLeft();
-						break;
-						
-					// L key
-					case 76:
-						moveRight();
-						break;
-						
-					// Spacebar
-					case 32:
-						dropPlayerPiece()
-						break;
-					}
+					keyDown(e.keyCode);
 				});
 			});
         </script>

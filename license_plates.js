@@ -1,4 +1,3 @@
-
 // Question 3
 
 // For a given population, find the least number of characters required
@@ -14,38 +13,28 @@ function calculatePlates(population) {
 		// Do the calculation
 		numeric = 1;
 		alphabetic = 0;
-		while (countPlates(numeric, alphabetic) < population) {
+		total = 0;
+		while (total < population) {
 			if (numeric == 0) {
-				// If all characters are alphabetic
 				numeric = alphabetic + 1;
 				alphabetic = 0;
 			} else {
 				numeric--;
 				alphabetic++;
 			}
+			total = countPlates(numeric, alphabetic);
 		}
 	
 		// Format the pattern with pluralization and/or a comma
-		pattern = "";
-		if (numeric > 0) {
-			pattern += numeric + " number";
-			if (numeric > 1) {
-				pattern += "s";
-			}
-		}
-		if ((numeric > 0) && (alphabetic > 0)) {
-			pattern += ", ";
-		}
-		if (alphabetic > 0) {
-			pattern += alphabetic + " letter";
-			if (alphabetic > 1) {
-				pattern += "s";
-			}
-		}
+		pattern = (	((numeric > 0)? (numeric + " number" + 
+					((numeric > 1)? "s" : "") + 
+					((alphabetic > 0)? ", " : "")) : "") + 
+					((alphabetic > 0)? (alphabetic + " letter" + 
+					((alphabetic > 1)? "s" : "")) : "")
+					);
 	
 		// Now update the DOM objects to reflect the new values
 		$("#pattern").text(pattern);
-		total = countPlates(numeric, alphabetic);
 		$("#total").text(total);
 		$("#excess").text(total - population);
 	}

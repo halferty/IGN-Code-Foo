@@ -1,12 +1,16 @@
 // Bonus: Connect 4
 //
 
-
-
+// Globals
 
 // The game grid
 // . = nothing, o = player piece, x = computer piece
-var grid = [
+var grid;
+			
+var playerCol = 4;
+
+function restartGame() {
+	grid = [
 			[".",".",".",".",".",".","."],
 			[".",".",".",".",".",".","."],
 			[".",".",".",".",".",".","."],
@@ -14,32 +18,44 @@ var grid = [
 			[".",".",".",".",".",".","."],
 			[".",".",".",".",".",".","."],
 			];
-			
-var playerCol = 4;
-
+	for (i=0;i<6;i++) {
+		for (j=0;j<7;j++) {
+			$("#row" + (i+1) + "col" + (j+1)).css("color", "black");
+		}
+	}
+}
 
 function gameLoop() {
-	// Show the updates
 	updateDOM();
-}			
+}
 
-setInterval(gameLoop, 1);
+setInterval(gameLoop, 10);
+restartGame();
 
 
 // Drops a game piece
-
-function dropGamePiece(col, playerPiece) {
-	
+function dropGamePiece(board, col, playerPiece) {
 	for(i=5;i>=0;i--) {
-		if (grid[i][col] == ".") {
-			grid[i][col] = playerPiece;
+		if (board[i][col] == ".") {
+			board[i][col] = playerPiece;
 			break;
 		}
 	}
 }
 
+function canDrop(board, col) {
+	return (board[0][col] == ".");
+}
+
 function dropPlayerPiece() {
-	dropGamePiece(playerCol, "o");
+	if (canDrop(grid, playerCol)) {
+		dropGamePiece(grid, playerCol, "o");
+	} else {
+		$("#error").text("Negative, ghost rider, the pattern is full.");
+		setTimeout('$("#error").text("")', 1000);
+	}
+	// Let the AI have a turn.
+	AI();
 }
 
 function moveRight() {
@@ -47,6 +63,7 @@ function moveRight() {
 		playerCol++;
 	}
 }
+Math.floor((Math.random()*10)+1);
 
 function moveLeft() {
 	if (playerCol > 0) {
@@ -82,7 +99,35 @@ function updateDOM() {
 
 // Computer player function
 function AI() {
-	// If the player has 2 in a row anywhere try to block.
-	
-	// If the player has 2 in a row anywhere 
+	col = Math.floor(Math.random()*6);
+	while (!canDrop(grid, col)) {
+		col = Math.floor(Math.random()*6);
+	}
+	dropGamePiece(grid, col, "x");
 }
+
+function keyDown(keyCode) {
+	switch (keyCode) {		
+	// H key
+	case 72:
+		moveLeft();
+		break;
+						
+	// L key
+	case 76:
+		moveRight();
+		break;
+	
+	// Spacebar
+	case 32:
+		dropPlayerPiece()
+		break;
+		
+	// R key
+	case 82:
+		restartGame()
+		break;
+	}
+}
+
+
