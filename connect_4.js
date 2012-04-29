@@ -39,8 +39,12 @@ function restartGame() {
 			];
 	for (i=0;i<6;i++) {
 		for (j=0;j<7;j++) {
-			$("#row" + (i+1) + "col" + (j+1)).css("color", "black");
-			$("#row" + (i+1) + "col" + (j+1)).css("font-weight", "normal");
+			$("#row" + (i+1) + "col" + (j+1)).css(
+				{
+					"color" : "black",
+					"font-weight" : "normal",
+					"background" : ""
+				});
 		}
 	}
 	
@@ -286,8 +290,8 @@ function checkForWinCondition() {
 					winning_piece = grd2[i][j];
 					winning_pieces.push([i,j]);
 					winning_pieces.push([i+1,j+1]);
-					winning_pieces.push([i+1,j+2]);
-					winning_pieces.push([i+1,j+3]);
+					winning_pieces.push([i+2,j+2]);
+					winning_pieces.push([i+3,j+3]);
 					break loop1;
 				}
 				if (	grd2[i+1][j-1] == base &&
@@ -298,8 +302,8 @@ function checkForWinCondition() {
 					winning_piece = grd2[i][j];
 					winning_pieces.push([i,j]);
 					winning_pieces.push([i+1,j-1]);
-					winning_pieces.push([i+1,j-2]);
-					winning_pieces.push([i+1,j-3]);
+					winning_pieces.push([i+2,j-2]);
+					winning_pieces.push([i+3,j-3]);
 					break loop1;
 				}
 				if (	grd2[i-1][j+1] == base &&
@@ -310,8 +314,8 @@ function checkForWinCondition() {
 					winning_piece = grd2[i][j];
 					winning_pieces.push([i,j]);
 					winning_pieces.push([i-1,j+1]);
-					winning_pieces.push([i-1,j+2]);
-					winning_pieces.push([i-1,j+3]);
+					winning_pieces.push([i-2,j+2]);
+					winning_pieces.push([i-3,j+3]);
 					break loop1;
 				}
 				if (	grd2[i-1][j-1] == base &&
@@ -322,15 +326,16 @@ function checkForWinCondition() {
 					winning_piece = grd2[i][j];
 					winning_pieces.push([i,j]);
 					winning_pieces.push([i-1,j-1]);
-					winning_pieces.push([i-1,j-2]);
-					winning_pieces.push([i-1,j-3]);
+					winning_pieces.push([i-2,j-2]);
+					winning_pieces.push([i-3,j-3]);
 					break loop1;
 				}
 			}
 		}
 	}
 	
-	// If there's a win condition, end the game and set the winning pieces to bold.
+	// If there's a win condition, end the game, and set the winning pieces to bold
+	// and set their background color accordingly.
 	if (win) {
 		game_over = true;
 		if (winning_piece == "o") {
@@ -339,9 +344,11 @@ function checkForWinCondition() {
 			$("#status").text("The computer won!");
 		}
 		for (k = 0; k < 4; k++) {
-			$(	"#row" + (winning_pieces[k][0]-start_offset+1) +
-				"col" + (winning_pieces[k][1]-start_offset+1)
-				).css("font-weight", "bold");
+			piece_row = (winning_pieces[k][0] - start_offset + 1);
+			piece_col = (winning_pieces[k][1] - start_offset + 1);
+			$(	"#row" + piece_row + "col" + piece_col).css("font-weight", "bold");
+			$(	"#row" + piece_row + "col" + piece_col).css(
+				"background", ((winning_piece == "x")? "#EEAAAA" : "#AAAAEE"));
 		}
 	}
 }

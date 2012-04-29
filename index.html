@@ -17,10 +17,10 @@
 			<div id="header">
 				<h1>IGN Code Foo 2012 Application</h1>
 				<br />
-				<br /><p>Dummy text all over the place, yo.</p>
 			</div>
 			<div id="content-right-wrapper">
 				<div id="content">
+					
 
 					<!-- QUESTION 1 --> 
 					<h2>Question 1</h2>
@@ -62,8 +62,8 @@ interiorVolume = (baseInteriorVolume -
 pingPongBallVolume = ((4/3)*(Math.PI) *
 	Math.pow((PING_PONG_DIAMETER/2.0), 3));
 
-// Assuming ping pong balls are cubes,
-// how many could fit?
+// Assuming ping pong balls are stacked
+// neatly, how many could fit?
 basePingPongBallsPerBus = (interiorVolume /
 	pingPongBallVolume);
 
@@ -81,15 +81,16 @@ pingPongBallsPerBus = (basePingPongBallsPerBus *
 					another</a> wikipedia page, if we assume the "poured random packing" model, the
 					spheres have a packing density of 0.609 to 0.625. Choosing 0.62 quite arbitrarily,
 					we can assume that the actual number of spheres packed into a 1 meter cube is
-					18,507 (29850*0.61). Now we need to determine the volume of the interior of the
-					school bus.
+					18,507 (29850*0.61).</p>
+					<p>Now we need to determine the volume of the interior of the school bus.
 					<a href="http://www.nhtsa.gov/people/injury/buses/choosing_schoolbus/pre-school-bus_06.html">
 					According to the NHTSA</a>, the average interior width of a school bus is
 					90 inches (2.29 meters). According to <a href="http://ntl.bts.gov/lib/10000/10600/10694/MBTC1054-1.pdf">
 					another government site</a>, the overall length of a Type C school bus is 10.86 meters. 
 					Now, we need to subtract the length of the engine compartment (assuming we want to be
 					able to bus these ping pong balls about. Otherwise filling the bus is just silly,.. right?).
-					Anyway, my strategy is to find a side-view image of the bus and count the pixels. I'm
+					</p>
+					<p>Anyway, my strategy is to find a side-view image of the bus and count the pixels. I'm
 					totally serious. Using Figure 3 on
 					<a href="http://www.pabulletin.com/secure/data/vol26/26-37/1532b.html">this page</a>,
 					from the windshield forward is 89 pixels. From the windshield back is 559 pixels. So,
@@ -102,7 +103,8 @@ pingPongBallsPerBus = (basePingPongBallsPerBus *
 					<a href="http://www.isbe.state.il.us/funding/pdf/seat_belts_07-5758.pdf">yet another
 					govt. doc</a>, the typical three-person seat width is 39 inches (1 meter). I'm going
 					to guesstimate the seat length (based on my personal recollection) to be 20 inches
-					(0.51 meters). The last thing we have to determine is the seat back height.
+					(0.51 meters).</p>
+					<p>The last thing we have to determine is the seat back height.
 					As fortune would have it,
 					<a href="http://www.fmcsa.dot.gov/rules-regulations/administration/fmcsr/fmcsrruletext.aspx?reg=571.222">
 					there is a law in effect</a> mandating that seats must have
@@ -111,12 +113,14 @@ pingPongBallsPerBus = (basePingPongBallsPerBus *
 					some research into controlling unruly ping pong balls. 24 inches is 0.61 meters,
 					giving us a total seat volume of 1.0 * 0.075 * (0.61 + 0.51) or 0.084 cubic meters.
 					This gives us a total internal volume of 38.26 - (0.084 * 24) or 36.24 cubic meters.
-					A little dimsneional analysis and we have (36.24 cubic meters) * (18507 ping pong balls / 1 cubic meter)
+					</p>
+					<p>A little math and we have (36.24 cubic meters) * (18507 ping pong balls / 1 cubic meter)
 					which gives us 670,694 ping pong balls per bus. Or if you run the javascript code above, you get
 					<b>716,967</b> ping pong balls. (Lesson learned: Never send a human to do a machine's job.)
 					</p>
 					<br />
 
+					
 					<!-- QUESTION 2 --> 
 					<h2>Question 2: Fluid Layout</h2>
 					<p>You're looking at it. :P</p><p>I would choose a fluid layout if I thought it wouldn't pose
@@ -125,6 +129,7 @@ pingPongBallsPerBus = (basePingPongBallsPerBus *
 					<p>(Of course, my CSS skills are virtually nonexistent. I just cobbled this page
 					together from looking at open-source three-column layouts around the web).</p>
 					<br />
+					
 					
 					<!-- QUESTION 3 --> 
 					<h2>Question 3: License Plate Calculation</h2>
@@ -155,6 +160,7 @@ pingPongBallsPerBus = (basePingPongBallsPerBus *
 						});
 					</script>
 					<br />
+					
 					
 					<!-- BONUS: CONNECT 4 -->
 					<h2>Bonus: Connect 4 Game</h2>
@@ -245,24 +251,17 @@ pingPongBallsPerBus = (basePingPongBallsPerBus *
 					
 				</div>
 				<div id="right">
-					<p>
-					Bacon ipsum dolor sit amet leberkas ribeye pork chop andouille, fatback shank bacon pastrami pork belly short loin.
-					Boudin fatback sirloin, jerky chuck rump short ribs. Bacon tongue sirloin short ribs salami, ham hock beef spare ribs ribeye speck beef ribs t-bone.
-					Sirloin ham hock beef ribs shankle.</p>
-					<center><a href="http://baconipsum.com/">baconipsum.com</a></center><br /><br />
+					<p>Lorem Ipsum etc.</p>
 				</div>
 			</div>
 			<div id="left">
-			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-			Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-			when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-			It has survived not only five centuries, but also the leap into electronic typesetting,
-			remaining essentially unchanged.
-			It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-			and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-			</p></div>
+				<p>Lorem Ipsum etc.</p>
+			</div>
 			<div id="footer">
-			<p>This is some footer text. This is some footer text. This is some footer text. </div>
+				<p>This is some footer text. Yep, it stretches the whole way across. This is some footer text.
+				Yep, it stretches the whole way across.</p>
+				<p>This is some more footer text. Yep, it stretches the whole way across. This is some more footer text.
+				Yep, it stretches the whole way across.</p></div>
 		</div>
 	</body>
 </html>
