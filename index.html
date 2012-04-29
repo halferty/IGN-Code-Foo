@@ -2,140 +2,270 @@
 <html>
 	<head>
 		<title>IGN Code Foo^2</title>
-		<link rel="main.css" media="screen" rel="stylesheet" type="text/css">
+		<link href="main.css" media="screen" rel="stylesheet" type="text/css" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 		<script src="license_plates.js" type="text/javascript"></script>
 		<script src="connect_4.js" type="text/javascript"></script>
+		
+		<!-- Google Code Prettifier for the javascript in Question 1 -->
+		<link href="google-code-prettify/prettify.css" media="screen" rel="stylesheet" type="text/css" />
+		<script src="google-code-prettify/prettify.js" type="text/javascript"></script>
+		
 	</head>
-	<body>
-		
-		<!-- QUESTION 2 
-		
-		<p>You're looking at it. :P I would choose a fluid layout if I thought it wouldn't pose
-		a problem for mobile users. If the page is primarily text or scalable CSS/HTML5 elements, a
-		fluid layout may work better than creating a separate mobile view.</p>
+	<body onload="prettyPrint()">
+		<div id="wrapper">
+			<div id="header">
+				<h1>IGN Code Foo 2012 Application</h1>
+				<br />
+				<br /><p>Dummy text all over the place, yo.</p>
+			</div>
+			<div id="content-right-wrapper">
+				<div id="content">
+
+					<!-- QUESTION 1 --> 
+					<h2>Question 1</h2>
+					<q>How many ping pong balls would it take to fill an average-sized school bus?</q>
+					<p>Before I get to the wall of text, here's some general (pseudo)code that summarizes
+					my approach to solving the problem:</p>
+					<pre class="prettyprint">
+// Constants
+// All length dimensions in meters.
+PING_PONG_DIAMETER = 0.04;
+PACKING_DENSITY = 0.62;
+BUS_INTERIOR_LENGTH = 9.13;
+BUS_INTERIOR_WIDTH = 2.44;
+BUS_INTERIOR_HEIGHT = 1.83;
+
+SEAT_WIDTH = 1.0;
+SEAT_BACK_HEIGHT = 0.61;
+SEAT_BOTTOM_LENGTH = 0.51;
+SEAT_THICKNESS = 0.075;
+SEAT_ROWS = 12;
+
+// Individual seat volume
+seatVolume = (SEAT_WIDTH * SEAT_THICKNESS *
+	(SEAT_BACK_HEIGHT+SEAT_BOTTOM_LENGTH));
+
+// Volume of all seats
+seatsVolume = (seatVolume * SEAT_ROWS * 2);
+
+// Interior volume, ignoring seats
+baseInteriorVolume = (BUS_INTERIOR_LENGTH *
+	BUS_INTERIOR_WIDTH *
+	BUS_INTERIOR_HEIGHT);
+
+// Subtract seat volume
+interiorVolume = (baseInteriorVolume -
+	seatsVolume);
+
+// Get ping pong ball volume
+pingPongBallVolume = ((4/3)*(Math.PI) *
+	Math.pow((PING_PONG_DIAMETER/2.0), 3));
+
+// Assuming ping pong balls are cubes,
+// how many could fit?
+basePingPongBallsPerBus = (interiorVolume /
+	pingPongBallVolume);
+
+// If a certain percentage of that is empty
+// space, calculate the actual value.
+pingPongBallsPerBus = (basePingPongBallsPerBus *
+	PACKING_DENSITY);
 	
-		<!-- QUESTION 3 
-		<form>
-			<ul>
-				<li>
-					Population:
-					<span><input id="population" type="text"></span>
-				</li>
-				<li>
-					Pattern:
-					<span id="pattern"></span>
-				</li>
-				<li>
-					Total Plates:
-					<span id="total"></span>
-				</li>
-				<li>
-					Excess Plates:
-					<span id="excess"></span>
-				</li>
-			</ul>
-		</form>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#population").keyup(function() {
-					calculatePlates($(this).val());
-				});
-			});
-        </script>
-		
-		 BONUS: CONNECT 4 -->
-		<center>
-		<code>
-		The world's worst connect four game.<br><br>
-		o
-			<span id="arw1">-</span>
-			<span id="arw2">-</span>
-			<span id="arw3">-</span>
-			<span id="arw4">-</span>
-			<span id="arw5">v</span>
-			<span id="arw6">-</span>
-			<span id="arw7">-</span>
-		o<br>
-		|
-			<span id="row1col1">.</span>
-			<span id="row1col2">.</span>
-			<span id="row1col3">.</span>
-			<span id="row1col4">.</span>
-			<span id="row1col5">.</span>
-			<span id="row1col6">.</span>
-			<span id="row1col7">.</span>
-		|<br>
-		|<span id="row2">
-			<span id="row2col1">.</span>
-			<span id="row2col2">.</span>
-			<span id="row2col3">.</span>
-			<span id="row2col4">.</span>
-			<span id="row2col5">.</span>
-			<span id="row2col6">.</span>
-			<span id="row2col7">.</span>
-		</span>|<br>
-		|<span id="row1">
-			<span id="row3col1">.</span>
-			<span id="row3col2">.</span>
-			<span id="row3col3">.</span>
-			<span id="row3col4">.</span>
-			<span id="row3col5">.</span>
-			<span id="row3col6">.</span>
-			<span id="row3col7">.</span>
-		</span>|<br>
-		|<span id="row1">
-			<span id="row4col1">.</span>
-			<span id="row4col2">.</span>
-			<span id="row4col3">.</span>
-			<span id="row4col4">.</span>
-			<span id="row4col5">.</span>
-			<span id="row4col6">.</span>
-			<span id="row4col7">.</span>
-		</span>|<br>
-		|<span id="row1">
-			<span id="row5col1">.</span>
-			<span id="row5col2">.</span>
-			<span id="row5col3">.</span>
-			<span id="row5col4">.</span>
-			<span id="row5col5">.</span>
-			<span id="row5col6">.</span>
-			<span id="row5col7">.</span>
-		</span>|<br>
-		|<span id="row1">
-			<span id="row6col1">.</span>
-			<span id="row6col2">.</span>
-			<span id="row6col3">.</span>
-			<span id="row6col4">.</span>
-			<span id="row6col5">.</span>
-			<span id="row6col6">.</span>
-			<span id="row6col7">.</span>
-		</span>|<br>
-		o
-			<span>-</span>
-			<span>-</span>
-			<span>-</span>
-			<span>-</span>
-			<span>-</span>
-			<span>-</span>
-			<span>-</span>
-		o<br><br>
-		h, l = move left, right<br>
-		Spacebar = drop a thingie.</br>
-		r = restart game.</br>
-		<span id="error" style="color:red"></span><br>
-		</code>
-		</center>
-		<script type="text/javascript">
-			$("document").ready(function() {
-				$(document).keydown(function(e) {
-					keyDown(e.keyCode);
-				});
-			});
-        </script>
-		
+					</pre>
+					<p>According to wikipedia, a regulation ping pong ball has a diameter of 40mm. This
+					gives a volume of 33.5 cm<sup>3</sup>. This means 29,850 ping pong balls would fill
+					a one meter cube, if they were also cubes. We need to find out how much of that space
+					is actually occupied.
+					According to <a href="http://en.wikipedia.org/wiki/Random_close_pack#For_spheres">
+					another</a> wikipedia page, if we assume the "poured random packing" model, the
+					spheres have a packing density of 0.609 to 0.625. Choosing 0.62 quite arbitrarily,
+					we can assume that the actual number of spheres packed into a 1 meter cube is
+					18,507 (29850*0.61). Now we need to determine the volume of the interior of the
+					school bus.
+					<a href="http://www.nhtsa.gov/people/injury/buses/choosing_schoolbus/pre-school-bus_06.html">
+					According to the NHTSA</a>, the average interior width of a school bus is
+					90 inches (2.29 meters). According to <a href="http://ntl.bts.gov/lib/10000/10600/10694/MBTC1054-1.pdf">
+					another government site</a>, the overall length of a Type C school bus is 10.86 meters. 
+					Now, we need to subtract the length of the engine compartment (assuming we want to be
+					able to bus these ping pong balls about. Otherwise filling the bus is just silly,.. right?).
+					Anyway, my strategy is to find a side-view image of the bus and count the pixels. I'm
+					totally serious. Using Figure 3 on
+					<a href="http://www.pabulletin.com/secure/data/vol26/26-37/1532b.html">this page</a>,
+					from the windshield forward is 89 pixels. From the windshield back is 559 pixels. So,
+					the interior length is about 84.1% of the total length, which comes to 9.13 meters.
+					If we ignore the fact that the roof of the bus may be curved, most tyle c school busses
+					have a ceiling height of about 6' (1.83 meters). These three figures give a volume of
+					38.26 cubic meters.
+					<p>Of course, we still need to subtract the volume of the seats. I'll assume the seats
+					are 75mm thick on both the bottom and back parts. According to
+					<a href="http://www.isbe.state.il.us/funding/pdf/seat_belts_07-5758.pdf">yet another
+					govt. doc</a>, the typical three-person seat width is 39 inches (1 meter). I'm going
+					to guesstimate the seat length (based on my personal recollection) to be 20 inches
+					(0.51 meters). The last thing we have to determine is the seat back height.
+					As fortune would have it,
+					<a href="http://www.fmcsa.dot.gov/rules-regulations/administration/fmcsr/fmcsrruletext.aspx?reg=571.222">
+					there is a law in effect</a> mandating that seats must have
+					backs that are 24 inches high (up from the previous standard of 20 inches). They
+					cite the effect higher seats have on managing unruly children. Now if only they would do
+					some research into controlling unruly ping pong balls. 24 inches is 0.61 meters,
+					giving us a total seat volume of 1.0 * 0.075 * (0.61 + 0.51) or 0.084 cubic meters.
+					This gives us a total internal volume of 38.26 - (0.084 * 24) or 36.24 cubic meters.
+					A little dimsneional analysis and we have (36.24 cubic meters) * (18507 ping pong balls / 1 cubic meter)
+					which gives us 670,694 ping pong balls per bus. Or if you run the javascript code above, you get
+					<b>716,967</b> ping pong balls. (Lesson learned: Never send a human to do a machine's job.)
+					</p>
+					<br />
+
+					<!-- QUESTION 2 --> 
+					<h2>Question 2: Fluid Layout</h2>
+					<p>You're looking at it. :P</p><p>I would choose a fluid layout if I thought it wouldn't pose
+					a problem for mobile users. If the page is primarily text or scalable CSS/HTML5 elements, a
+					fluid layout may work better than creating a separate mobile view.</p>
+					<p>(Of course, my CSS skills are virtually nonexistent. I just cobbled this page
+					together from looking at open-source three-column layouts around the web).</p>
+					<br />
+					
+					<!-- QUESTION 3 --> 
+					<h2>Question 3: License Plate Calculation</h2>
+					<ul>
+						<li>
+							Population:
+							<span><input id="population" type="text"></span>
+						</li>
+						<li>
+							Pattern:
+							<span id="pattern"></span>
+						</li>
+						<li>
+							Total Plates:
+							<span id="total"></span>
+						</li>
+						<li>
+							Excess Plates:
+							<span id="excess"></span>
+						</li>
+					</ul>
+					<script type="text/javascript">
+						$(document).ready(function() {
+							$("#population").keyup(function() {
+								
+								calculatePlates($(this).val());
+							});
+						});
+					</script>
+					<br />
+					
+					<!-- BONUS: CONNECT 4 -->
+					<h2>Bonus: Connect 4 Game</h2>
+					<center>
+					<code>
+					The world's worst connect four game.<br /><br />
+					o
+					<span id="arw1">-</span>
+					<span id="arw2">-</span>
+					<span id="arw3">-</span>
+					<span id="arw4">-</span>
+					<span id="arw5">v</span>
+					<span id="arw6">-</span>
+					<span id="arw7">-</span>
+					o<br />|
+					<span id="row1col1">.</span>
+					<span id="row1col2">.</span>
+					<span id="row1col3">.</span>
+					<span id="row1col4">.</span>
+					<span id="row1col5">.</span>
+					<span id="row1col6">.</span>
+					<span id="row1col7">.</span>
+					|<br />|
+					<span id="row2col1">.</span>
+					<span id="row2col2">.</span>
+					<span id="row2col3">.</span>
+					<span id="row2col4">.</span>
+					<span id="row2col5">.</span>
+					<span id="row2col6">.</span>
+					<span id="row2col7">.</span>
+					|<br />|
+					<span id="row3col1">.</span>
+					<span id="row3col2">.</span>
+					<span id="row3col3">.</span>
+					<span id="row3col4">.</span>
+					<span id="row3col5">.</span>
+					<span id="row3col6">.</span>
+					<span id="row3col7">.</span>
+					|<br />|
+					<span id="row4col1">.</span>
+					<span id="row4col2">.</span>
+					<span id="row4col3">.</span>
+					<span id="row4col4">.</span>
+					<span id="row4col5">.</span>
+					<span id="row4col6">.</span>
+					<span id="row4col7">.</span>
+					|<br />|
+					<span id="row5col1">.</span>
+					<span id="row5col2">.</span>
+					<span id="row5col3">.</span>
+					<span id="row5col4">.</span>
+					<span id="row5col5">.</span>
+					<span id="row5col6">.</span>
+					<span id="row5col7">.</span>
+					|<br />|
+					<span id="row6col1">.</span>
+					<span id="row6col2">.</span>
+					<span id="row6col3">.</span>
+					<span id="row6col4">.</span>
+					<span id="row6col5">.</span>
+					<span id="row6col6">.</span>
+					<span id="row6col7">.</span>
+					|<br />o
+					<span>-</span>
+					<span>-</span>
+					<span>-</span>
+					<span>-</span>
+					<span>-</span>
+					<span>-</span>
+					<span>-</span>
+					o<br /><br />
+					h, l = move left, right<br />
+					d = drop a thingie.<br />
+					r = restart game.<br />
+					<span id="status" style="color:red"></span><br />
+					<br />
+					<br />
+					<br />
+					</code>
+					</center>
+					<script type="text/javascript">
+						$("document").ready(function() {
+							$(document).keydown(function(e) {
+								keyDown(e.keyCode);
+							});
+						});
+					</script>
+					
+				</div>
+				<div id="right">
+					<p>
+					Bacon ipsum dolor sit amet leberkas ribeye pork chop andouille, fatback shank bacon pastrami pork belly short loin.
+					Boudin fatback sirloin, jerky chuck rump short ribs. Bacon tongue sirloin short ribs salami, ham hock beef spare ribs ribeye speck beef ribs t-bone.
+					Sirloin ham hock beef ribs shankle.</p>
+					<center><a href="http://baconipsum.com/">baconipsum.com</a></center><br /><br />
+				</div>
+			</div>
+			<div id="left">
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+			Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+			when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+			It has survived not only five centuries, but also the leap into electronic typesetting,
+			remaining essentially unchanged.
+			It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+			and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			</p></div>
+			<div id="footer">
+			<p>This is some footer text. This is some footer text. This is some footer text. </div>
+		</div>
 	</body>
-	</html>
+</html>
 		
 		
 		
