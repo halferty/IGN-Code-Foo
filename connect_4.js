@@ -192,7 +192,6 @@ function keyDown(keyCode) {
 function checkForWinCondition() {
 
 	// Copy the game grid into a larger empty grid.
-	// CPU cycles are so cheap these days.
 	
 	grd2 = [
 			[".",".",".",".",".",".",".",".",".",".",".",".","."],
@@ -221,7 +220,6 @@ function checkForWinCondition() {
 	
 	// Check each grid position. If it contains a player piece, check in all 8
 	// directions to see if there's a win.
-	// Did I mention cpu cycles are cheap?
 	
 	win = false;
 	winning_pieces = [];
